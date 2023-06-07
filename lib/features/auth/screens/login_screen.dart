@@ -1,6 +1,5 @@
 import 'package:clone_app_amazon/constants/global_variables.dart';
-import 'package:clone_app_amazon/features/auth/screens/register_screen.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -12,6 +11,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
   bool _passwordVisible = false;
 
   @override
@@ -51,54 +51,89 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            // ------ field username ------
-            SizedBox(
-              width: 300,
-              height: 50,
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5)),
-                  prefixIcon: const Icon(Icons.person,
-                      color: GloblalVariable.Hex_9c9c9c),
-                  hintText: 'Usename',
-                  filled: true,
-                  fillColor: Colors.white,
+
+            Form(
+              key: _formKey,
+              child: SizedBox(
+                height: 160,
+                child: Column(
+                  children: [
+                    // ------ field username ------
+                    Expanded(
+                      child: SizedBox(
+                        width: 300,
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter a username';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            focusedBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.blue)),
+                            enabledBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white)),
+                            focusColor: Colors.blue,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5)),
+                            prefixIcon: const Icon(Icons.person,
+                                color: GloblalVariable.Hex_9c9c9c),
+                            hintText: 'Usename',
+                            filled: true,
+                            fillColor: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    // ------ field passwords ------
+                    Expanded(
+                      child: SizedBox(
+                        width: 300,
+                        height: 50,
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a password';
+                            }
+                            return null;
+                          },
+                          obscureText: _passwordVisible,
+                          decoration: InputDecoration(
+                            focusedBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.blue)),
+                            enabledBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white)),
+                            focusColor: Colors.blue,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5)),
+                            prefixIcon: const Icon(Icons.lock,
+                                size: 20, color: GloblalVariable.Hex_9c9c9c),
+                            hintText: 'Password',
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _passwordVisible = !_passwordVisible;
+                                });
+                              },
+                              child: Icon(
+                                  _passwordVisible
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  size: 20,
+                                  color: GloblalVariable.Hex_9c9c9c),
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-            const SizedBox(height: 10),
-            // ------ field passwords ------
-            SizedBox(
-              width: 300,
-              height: 50,
-              child: TextField(
-                obscureText: _passwordVisible,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5)),
-                  prefixIcon: const Icon(Icons.lock,
-                      size: 20, color: GloblalVariable.Hex_9c9c9c),
-                  hintText: 'Password',
-                  suffixIcon: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _passwordVisible = !_passwordVisible;
-                      });
-                    },
-                    child: Icon(
-                        _passwordVisible
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                        size: 20,
-                        color: GloblalVariable.Hex_9c9c9c),
-                  ),
-                  filled: true,
-                  fillColor: Colors.white,
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
             // ----- forgot password -----
             Padding(
               padding: const EdgeInsets.only(right: 35),
@@ -122,6 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
             // ------ button login-----
             GestureDetector(
                 onTap: () {
+                  if (_formKey.currentState!.validate()) {}
                   // Navigator.push(context,
                   //     MaterialPageRoute(builder: (_) => const LoginScreen()));
                 },
