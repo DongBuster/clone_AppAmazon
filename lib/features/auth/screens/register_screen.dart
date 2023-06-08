@@ -1,4 +1,5 @@
 import 'package:clone_app_amazon/constants/global_variables.dart';
+import 'package:clone_app_amazon/features/auth/widgets/input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -34,9 +35,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return null;
   }
 
+  // ---- widget passwordVisiable ------
+
+  Widget passwordVisiable() {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _passwordVisible = !_passwordVisible;
+        });
+      },
+      child: Icon(_passwordVisible ? Icons.visibility_off : Icons.visibility,
+          size: 20, color: GloblalVariable.Hex_9c9c9c),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
@@ -52,7 +68,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: IconButton(
                 padding: const EdgeInsets.fromLTRB(30, 30, 0, 0),
                 onPressed: () {
-                  context.pop();
+                  GoRouter.of(context).pushNamed(GloblalVariable.loginScreen);
                 },
                 icon: const Icon(Icons.arrow_back_ios,
                     size: 22, color: Colors.white),
@@ -71,6 +87,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
             ),
+            // ----- input fields ------
             Form(
               key: _formKey,
               child: SizedBox(
@@ -81,186 +98,95 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   children: [
                     // ------ field username ------
                     Expanded(
-                      child: SizedBox(
+                      child: InputField(
                         width: 300,
                         height: 50,
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter some name';
-                            }
-                            return null;
-                          },
-                          cursorColor: Colors.blue,
-                          decoration: InputDecoration(
-                            enabledBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 1.0,
-                              ),
-                            ),
-                            focusedBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.blue,
-                                width: 2.0,
-                              ),
-                            ),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                            prefixIcon: const Icon(Icons.person,
-                                color: GloblalVariable.Hex_9c9c9c),
-                            hintText: 'Name',
-                            filled: true,
-                            fillColor: Colors.white,
-                          ),
-                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some name';
+                          }
+                          return null;
+                        },
+                        cursorColor: Colors.blue,
+                        fillColor: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        passwordVisible: null,
+                        suffixIcon: const SizedBox(),
+                        prefixIcon: const Icon(Icons.person,
+                            color: GloblalVariable.Hex_9c9c9c),
+                        hintText: 'Name',
                       ),
                     ),
                     // ------- field email ---------
                     Expanded(
-                      child: SizedBox(
+                      child: InputField(
                         width: 300,
                         height: 50,
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter email';
-                            }
-                            return validateEmail(value);
-                          },
-                          cursorColor: Colors.blue,
-                          decoration: InputDecoration(
-                            enabledBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 1.0,
-                              ),
-                            ),
-                            focusedBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.blue,
-                                width: 2.0,
-                              ),
-                            ),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                            prefixIcon: const Icon(Icons.mail,
-                                color: GloblalVariable.Hex_9c9c9c),
-                            hintText: 'Email',
-                            filled: true,
-                            fillColor: Colors.white,
-                          ),
-                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter email';
+                          }
+                          return validateEmail(value);
+                        },
+                        cursorColor: Colors.blue,
+                        fillColor: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        passwordVisible: null,
+                        suffixIcon: const SizedBox(),
+                        prefixIcon: const Icon(Icons.mail,
+                            color: GloblalVariable.Hex_9c9c9c),
+                        hintText: 'Email',
                       ),
                     ),
                     // ------ field passwords ------
                     Expanded(
-                      child: SizedBox(
+                      child: InputField(
                         width: 300,
                         height: 50,
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter password';
-                            } else {
-                              setState(() {
-                                _password = value;
-                              });
-                            }
-                            return null;
-                          },
-                          cursorColor: Colors.blue,
-                          obscureText: _passwordVisible,
-                          decoration: InputDecoration(
-                            enabledBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 1.0,
-                              ),
-                            ),
-                            focusedBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.blue,
-                                width: 2.0,
-                              ),
-                            ),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                            prefixIcon: const Icon(Icons.lock,
-                                size: 20, color: GloblalVariable.Hex_9c9c9c),
-                            hintText: 'Password',
-                            suffixIcon: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  _passwordVisible = !_passwordVisible;
-                                });
-                              },
-                              child: Icon(
-                                  _passwordVisible
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
-                                  size: 20,
-                                  color: GloblalVariable.Hex_9c9c9c),
-                            ),
-                            filled: true,
-                            fillColor: Colors.white,
-                          ),
-                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter password';
+                          } else {
+                            setState(() {
+                              _password = value;
+                            });
+                          }
+                          return null;
+                        },
+                        cursorColor: Colors.blue,
+                        fillColor: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        passwordVisible: _passwordVisible,
+                        prefixIcon: const Icon(Icons.lock,
+                            size: 20, color: GloblalVariable.Hex_9c9c9c),
+                        hintText: 'Password',
+                        suffixIcon: passwordVisiable(),
                       ),
                     ),
                     // ------ field confirm passwords ------
                     Expanded(
-                      child: SizedBox(
+                      child: InputField(
                         width: 300,
                         height: 50,
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter password';
-                            } else if (value != _password) {
-                              return 'Passwords don\'t match';
-                            }
-                            return null;
-                          },
-                          cursorColor: Colors.blue,
-                          obscureText: _passwordVisible,
-                          decoration: InputDecoration(
-                            enabledBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 1.0,
-                              ),
-                            ),
-                            focusedBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.blue,
-                                width: 2.0,
-                              ),
-                            ),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                            prefixIcon: const Icon(Icons.lock,
-                                size: 20, color: GloblalVariable.Hex_9c9c9c),
-                            hintText: 'Confirm password',
-                            suffixIcon: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  _passwordVisible = !_passwordVisible;
-                                });
-                              },
-                              child: Icon(
-                                  _passwordVisible
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
-                                  size: 20,
-                                  color: GloblalVariable.Hex_9c9c9c),
-                            ),
-                            filled: true,
-                            fillColor: Colors.white,
-                          ),
-                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter password';
+                          } else if (value != _password) {
+                            return 'Passwords don\'t match';
+                          }
+                          return null;
+                        },
+                        cursorColor: Colors.blue,
+                        fillColor: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        passwordVisible: _passwordVisible,
+                        prefixIcon: const Icon(Icons.lock,
+                            size: 20, color: GloblalVariable.Hex_9c9c9c),
+                        hintText: 'Confirm password',
+                        suffixIcon: passwordVisiable(),
                       ),
                     ),
+
                     const SizedBox(height: 50),
                   ],
                 ),
@@ -302,7 +228,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Container(
                   alignment: Alignment.center,
                   width: 250,
-                  height: 45,
+                  height: 50,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(3),
                       color: Colors.blue),

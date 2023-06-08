@@ -34,8 +34,8 @@ class _AuthScreenState extends State<AuthScreen> {
             child: Center(
               child: Text('Wellcome',
                   style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
                       color: Colors.white,
                       decoration: TextDecoration.none)),
             ),
@@ -46,31 +46,23 @@ class _AuthScreenState extends State<AuthScreen> {
               const Text('Do you want to something ?',
                   style: TextStyle(
                       fontSize: 18,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w800,
                       color: Colors.white,
                       decoration: TextDecoration.none)),
               // --------
               const SizedBox(height: 10),
               Container(
-                constraints: const BoxConstraints(maxWidth: 300),
+                constraints: const BoxConstraints(maxWidth: 330),
                 child: const Text(
-                    'Everything you want is here! Just click what you',
+                    'Everything you want is here! Just click what you want and it will be right in front of you',
                     style: TextStyle(
                         fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w600,
                         color: Colors.white54,
                         decoration: TextDecoration.none)),
               ),
-              Container(
-                constraints: const BoxConstraints(maxWidth: 300),
-                child: const Text('want and it will be right in front of you',
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white54,
-                        decoration: TextDecoration.none)),
-              ),
-              const SizedBox(height: 40),
+
+              const SizedBox(height: 90),
               // -------- button login ------
               GestureDetector(
                   onTap: () {
@@ -79,18 +71,18 @@ class _AuthScreenState extends State<AuthScreen> {
                   child: Container(
                     alignment: Alignment.center,
                     width: 200,
-                    height: 35,
+                    height: 40,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(3),
                         color: Colors.white),
                     child: const Text('Log In',
                         style: TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.bold,
                             color: Colors.blue,
                             decoration: TextDecoration.none)),
                   )),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               // ------ button sign up ------
               GestureDetector(
                   onTap: () {
@@ -100,19 +92,19 @@ class _AuthScreenState extends State<AuthScreen> {
                   child: Container(
                     alignment: Alignment.center,
                     width: 200,
-                    height: 35,
+                    height: 40,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(3),
                         color: Colors.blue),
                     child: const Text('Sign up',
                         style: TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.bold,
                             color: Colors.white,
                             decoration: TextDecoration.none)),
                   )),
 
-              const SizedBox(height: 30),
+              const SizedBox(height: 60),
             ],
           )
         ],

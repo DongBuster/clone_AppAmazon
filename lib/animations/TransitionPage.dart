@@ -11,7 +11,7 @@ class TransitionPage extends StatefulWidget {
 class _TransitionPageState extends State<TransitionPage>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
-      vsync: this, duration: const Duration(milliseconds: 400))
+      vsync: this, duration: const Duration(milliseconds: 300))
     ..forward();
 
   @override

@@ -1,4 +1,5 @@
 import 'package:clone_app_amazon/constants/global_variables.dart';
+import 'package:clone_app_amazon/features/auth/widgets/input_field.dart';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,6 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
@@ -32,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: IconButton(
                 padding: const EdgeInsets.fromLTRB(30, 30, 0, 0),
                 onPressed: () {
-                  context.pop();
+                  GoRouter.of(context).pushNamed(GloblalVariable.authScreen);
                 },
                 icon: const Icon(Icons.arrow_back_ios,
                     size: 22, color: Colors.white),
@@ -51,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-
+            // ----- input fields --------
             Form(
               key: _formKey,
               child: SizedBox(
@@ -60,73 +62,55 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     // ------ field username ------
                     Expanded(
-                      child: SizedBox(
-                        width: 300,
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter a username';
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            focusedBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.blue)),
-                            enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)),
-                            focusColor: Colors.blue,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                            prefixIcon: const Icon(Icons.person,
-                                color: GloblalVariable.Hex_9c9c9c),
-                            hintText: 'Usename',
-                            filled: true,
-                            fillColor: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    // ------ field passwords ------
-                    Expanded(
-                      child: SizedBox(
+                      child: InputField(
                         width: 300,
                         height: 50,
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter a password';
-                            }
-                            return null;
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter a username';
+                          }
+                          return null;
+                        },
+                        cursorColor: Colors.blue,
+                        fillColor: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        passwordVisible: null,
+                        suffixIcon: const SizedBox(),
+                        prefixIcon: const Icon(Icons.person,
+                            color: GloblalVariable.Hex_9c9c9c),
+                        hintText: 'Name',
+                      ),
+                    ),
+                    // ------ field passwords ------
+                    Expanded(
+                      child: InputField(
+                        width: 300,
+                        height: 50,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a password';
+                          }
+                          return null;
+                        },
+                        cursorColor: Colors.blue,
+                        fillColor: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        passwordVisible: _passwordVisible,
+                        prefixIcon: const Icon(Icons.lock,
+                            size: 20, color: GloblalVariable.Hex_9c9c9c),
+                        hintText: 'Password',
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _passwordVisible = !_passwordVisible;
+                            });
                           },
-                          obscureText: _passwordVisible,
-                          decoration: InputDecoration(
-                            focusedBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.blue)),
-                            enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)),
-                            focusColor: Colors.blue,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                            prefixIcon: const Icon(Icons.lock,
-                                size: 20, color: GloblalVariable.Hex_9c9c9c),
-                            hintText: 'Password',
-                            suffixIcon: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  _passwordVisible = !_passwordVisible;
-                                });
-                              },
-                              child: Icon(
-                                  _passwordVisible
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
-                                  size: 20,
-                                  color: GloblalVariable.Hex_9c9c9c),
-                            ),
-                            filled: true,
-                            fillColor: Colors.white,
-                          ),
+                          child: Icon(
+                              _passwordVisible
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              size: 20,
+                              color: GloblalVariable.Hex_9c9c9c),
                         ),
                       ),
                     ),
@@ -164,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Container(
                   alignment: Alignment.center,
                   width: 250,
-                  height: 45,
+                  height: 50,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(3),
                       color: Colors.blue),
@@ -208,6 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
+                  height: 40,
                   decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(5))),
@@ -225,6 +210,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(width: 30),
                 Container(
+                  height: 40,
                   decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(5))),
@@ -235,7 +221,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: 15,
                       height: 15,
                     ),
-                    label: Text('Login',
+                    label: const Text('Login',
                         style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
