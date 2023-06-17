@@ -1,5 +1,6 @@
 import 'package:clone_app_amazon/constants/global_variables.dart';
-import 'package:clone_app_amazon/features/auth/widgets/input_field.dart';
+import 'package:clone_app_amazon/common/widgets/custom_textfield.dart';
+import 'package:clone_app_amazon/features/auth/services/service_loginWithAccout.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,6 +18,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   // -------- variables for handling password -------
   late String _password;
   bool _passwordVisible = false;
+
+  // ---- variables for form controller -------
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   // ----- handle validate email --------
   String? validateEmail(String? value) {
@@ -46,6 +53,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
       },
       child: Icon(_passwordVisible ? Icons.visibility_off : Icons.visibility,
           size: 20, color: GloblalVariable.Hex_9c9c9c),
+    );
+  }
+
+  // ------- handle click button register ------
+
+  void signUpAccount() {
+    loginWithAccount.signUpAccount(
+      context: context,
+      email: _emailController.text,
+      password: _passwordController.text,
+      name: _nameController.text,
     );
   }
 
@@ -98,7 +116,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   children: [
                     // ------ field username ------
                     Expanded(
-                      child: InputField(
+                      child: CustomTextField(
+                        controller: _nameController,
                         width: 300,
                         height: 50,
                         validator: (value) {
@@ -119,7 +138,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     // ------- field email ---------
                     Expanded(
-                      child: InputField(
+                      child: CustomTextField(
+                        controller: _emailController,
                         width: 300,
                         height: 50,
                         validator: (value) {
@@ -140,7 +160,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     // ------ field passwords ------
                     Expanded(
-                      child: InputField(
+                      child: CustomTextField(
+                        controller: _passwordController,
                         width: 300,
                         height: 50,
                         validator: (value) {
@@ -165,7 +186,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     // ------ field confirm passwords ------
                     Expanded(
-                      child: InputField(
+                      child: CustomTextField(
+                        controller: null,
                         width: 300,
                         height: 50,
                         validator: (value) {
@@ -200,12 +222,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: const Text('Basic dialog title'),
+                            title: const Text('Terms and Service'),
                             content: const Text(
-                              'A dialog is a type of modal window that\n'
-                              'appears in front of app content to\n'
-                              'provide critical information, or prompt\n'
-                              'for a decision to be made.',
+                              'Các điều khoản này có thể bao gồm các \n'
+                              'quy định về bảo mật, quyền sở hữu trí \n'
+                              'tuệ, quyền riêng tư, quy định về nội \n'
+                              'dung và hành vi không được phép trên ứng dụng\n',
                             ),
                             actions: <Widget>[
                               TextButton(
@@ -213,17 +235,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   textStyle:
                                       Theme.of(context).textTheme.labelLarge,
                                 ),
-                                child: const Text('Disable'),
+                                child: const Text('Cancel'),
                                 onPressed: () {
                                   Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  textStyle:
+                                      Theme.of(context).textTheme.labelLarge,
+                                ),
+                                child: const Text('Appect'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  signUpAccount();
                                 },
                               ),
                             ],
                           );
                         });
                   }
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (_) => const LoginScreen()));
                 },
                 child: Container(
                   alignment: Alignment.center,

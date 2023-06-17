@@ -3,6 +3,7 @@ import 'package:clone_app_amazon/constants/global_variables.dart';
 import 'package:clone_app_amazon/features/auth/screens/auth_screen.dart';
 import 'package:clone_app_amazon/features/auth/screens/login_screen.dart';
 import 'package:clone_app_amazon/features/auth/screens/register_screen.dart';
+import 'package:clone_app_amazon/features/page/screens/homeScreen/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -35,6 +36,12 @@ class Routes {
             builder: (context, state) =>
                 const TransitionPage(child: RegisterScreen()),
           ),
-        ])
+          GoRoute(
+            path: '/home',
+            name: GloblalVariable.homeScreen,
+            builder: (context, state) =>
+                const TransitionPage(child: HomePage()),
+          ),
+        ]),
   ]);
 }

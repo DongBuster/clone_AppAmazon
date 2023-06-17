@@ -1,5 +1,8 @@
 import 'package:clone_app_amazon/constants/global_variables.dart';
-import 'package:clone_app_amazon/features/auth/widgets/input_field.dart';
+import 'package:clone_app_amazon/common/widgets/custom_textfield.dart';
+import 'package:clone_app_amazon/features/auth/services/service_loginWithAccout.dart';
+import 'package:clone_app_amazon/features/auth/services/service_loginWithFacebook.dart';
+import 'package:clone_app_amazon/features/auth/services/service_loginWithGoogle.dart';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -14,6 +17,20 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _passwordVisible = false;
+
+  // ---- variables for form controller -------
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  // ---- handle click button login --------
+  void signInAccount() {
+    loginWithAccount.signInAccount(
+      context: context,
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +77,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 160,
                 child: Column(
                   children: [
-                    // ------ field username ------
+                    // ------ field email ------
                     Expanded(
-                      child: InputField(
+                      child: CustomTextField(
+                        controller: _emailController,
                         width: 300,
                         height: 50,
                         validator: (value) {
@@ -78,12 +96,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         suffixIcon: const SizedBox(),
                         prefixIcon: const Icon(Icons.person,
                             color: GloblalVariable.Hex_9c9c9c),
-                        hintText: 'Name',
+                        hintText: 'Email',
                       ),
                     ),
                     // ------ field passwords ------
                     Expanded(
-                      child: InputField(
+                      child: CustomTextField(
+                        controller: _passwordController,
                         width: 300,
                         height: 50,
                         validator: (value) {
@@ -141,9 +160,9 @@ class _LoginScreenState extends State<LoginScreen> {
             // ------ button login-----
             GestureDetector(
                 onTap: () {
-                  if (_formKey.currentState!.validate()) {}
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (_) => const LoginScreen()));
+                  if (_formKey.currentState!.validate()) {
+                    signInAccount();
+                  }
                 },
                 child: Container(
                   alignment: Alignment.center,
@@ -197,7 +216,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(5))),
                   child: TextButton.icon(
-                    onPressed: null,
+                    onPressed: () async {
+                      await LoginWithFacebook.login();
+                      context.goNamed(GloblalVariable.homeScreen);
+                    },
                     icon:
                         const Icon(Icons.facebook_outlined, color: Colors.blue),
                     label: const Text('Login',
@@ -215,7 +237,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(5))),
                   child: TextButton.icon(
-                    onPressed: null,
+                    onPressed: () async {
+                      await LoginWithGoogle.SignInWithGoogle();
+
+                      // ignore: use_build_context_synchronously
+                      context.goNamed(GloblalVariable.homeScreen);
+                    },
                     icon: Image.asset(
                       'assets/img/google.png',
                       width: 15,

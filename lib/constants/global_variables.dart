@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
+String uri = 'http://192.168.1.2:3000';
+
 class GloblalVariable {
   // define name route
   static const String authScreen = 'authscreen';
   static const String loginScreen = 'loginscreen';
   static const String registerScreen = 'registerscreen';
+  static const String homeScreen = 'homescreen';
 
   // define background image auth screen
   static const String backgroundImageAuth = 'assets/img/background.jpg';
