@@ -1,12 +1,12 @@
-import 'dart:convert';
+// import 'dart:convert';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class LoginWithFacebook {
-  String prettyPrint(Map json) {
-    JsonEncoder encoder = const JsonEncoder.withIndent('  ');
-    String pretty = encoder.convert(json);
-    return pretty;
-  }
+  // String prettyPrint(Map json) {
+  //   JsonEncoder encoder = const JsonEncoder.withIndent('  ');
+  //   String pretty = encoder.convert(json);
+  //   return pretty;
+  // }
 
   Map<String, dynamic>? _userData;
   AccessToken? _accessToken;

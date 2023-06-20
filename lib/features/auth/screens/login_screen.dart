@@ -94,8 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(10),
                         passwordVisible: null,
                         suffixIcon: const SizedBox(),
-                        prefixIcon: const Icon(Icons.person,
-                            color: GloblalVariable.Hex_9c9c9c),
+                        prefixIcon: const Icon(Icons.person, color: hex_9c9c9c),
                         hintText: 'Email',
                       ),
                     ),
@@ -115,8 +114,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         fillColor: Colors.white,
                         borderRadius: BorderRadius.circular(10),
                         passwordVisible: _passwordVisible,
-                        prefixIcon: const Icon(Icons.lock,
-                            size: 20, color: GloblalVariable.Hex_9c9c9c),
+                        prefixIcon:
+                            const Icon(Icons.lock, size: 20, color: hex_9c9c9c),
                         hintText: 'Password',
                         suffixIcon: GestureDetector(
                           onTap: () {
@@ -129,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ? Icons.visibility_off
                                   : Icons.visibility,
                               size: 20,
-                              color: GloblalVariable.Hex_9c9c9c),
+                              color: hex_9c9c9c),
                         ),
                       ),
                     ),
@@ -160,9 +159,10 @@ class _LoginScreenState extends State<LoginScreen> {
             // ------ button login-----
             GestureDetector(
                 onTap: () {
-                  if (_formKey.currentState!.validate()) {
-                    signInAccount();
-                  }
+                  context.goNamed(GloblalVariable.homeScreen);
+                  // if (_formKey.currentState!.validate()) {
+                  //   signInAccount();
+                  // }
                 },
                 child: Container(
                   alignment: Alignment.center,
@@ -188,8 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: 110,
                   height: 2,
                   decoration: const BoxDecoration(
-                      border: Border(
-                          top: BorderSide(color: GloblalVariable.Hex_9c9c9c))),
+                      border: Border(top: BorderSide(color: hex_9c9c9c))),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(left: 8, right: 8),
@@ -200,8 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: 110,
                   height: 2,
                   decoration: const BoxDecoration(
-                      border: Border(
-                          top: BorderSide(color: GloblalVariable.Hex_9c9c9c))),
+                      border: Border(top: BorderSide(color: hex_9c9c9c))),
                 ),
               ],
             ),

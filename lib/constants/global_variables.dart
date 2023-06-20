@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 String uri = 'http://192.168.1.2:3000';
+const hex_9c9c9c = Color(0xff9c9c9c);
 
 class GloblalVariable {
   // define name route
@@ -11,6 +12,4 @@ class GloblalVariable {
 
   // define background image auth screen
   static const String backgroundImageAuth = 'assets/img/background.jpg';
-  // define color
-  static const Color Hex_9c9c9c = Color(0xff9c9c9c);
 }

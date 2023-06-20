@@ -52,7 +52,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         });
       },
       child: Icon(_passwordVisible ? Icons.visibility_off : Icons.visibility,
-          size: 20, color: GloblalVariable.Hex_9c9c9c),
+          size: 20, color: hex_9c9c9c),
     );
   }
 
@@ -131,8 +131,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         borderRadius: BorderRadius.circular(10),
                         passwordVisible: null,
                         suffixIcon: const SizedBox(),
-                        prefixIcon: const Icon(Icons.person,
-                            color: GloblalVariable.Hex_9c9c9c),
+                        prefixIcon: const Icon(Icons.person, color: hex_9c9c9c),
                         hintText: 'Name',
                       ),
                     ),
@@ -153,8 +152,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         borderRadius: BorderRadius.circular(10),
                         passwordVisible: null,
                         suffixIcon: const SizedBox(),
-                        prefixIcon: const Icon(Icons.mail,
-                            color: GloblalVariable.Hex_9c9c9c),
+                        prefixIcon: const Icon(Icons.mail, color: hex_9c9c9c),
                         hintText: 'Email',
                       ),
                     ),
@@ -178,8 +176,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         fillColor: Colors.white,
                         borderRadius: BorderRadius.circular(10),
                         passwordVisible: _passwordVisible,
-                        prefixIcon: const Icon(Icons.lock,
-                            size: 20, color: GloblalVariable.Hex_9c9c9c),
+                        prefixIcon:
+                            const Icon(Icons.lock, size: 20, color: hex_9c9c9c),
                         hintText: 'Password',
                         suffixIcon: passwordVisiable(),
                       ),
@@ -202,8 +200,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         fillColor: Colors.white,
                         borderRadius: BorderRadius.circular(10),
                         passwordVisible: _passwordVisible,
-                        prefixIcon: const Icon(Icons.lock,
-                            size: 20, color: GloblalVariable.Hex_9c9c9c),
+                        prefixIcon:
+                            const Icon(Icons.lock, size: 20, color: hex_9c9c9c),
                         hintText: 'Confirm password',
                         suffixIcon: passwordVisiable(),
                       ),

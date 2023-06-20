@@ -15,24 +15,20 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-          // color: Colors.blue,
-          child: Column(
-        children: [
-          ElevatedButton(
-            onPressed: () async {
-              await LoginWithGoogle.logOut();
-              await LoginWithFacebook.logOut();
-              loginWithAccount.logOut();
-              if (context.mounted) {
-                context.goNamed(GloblalVariable.loginScreen);
-              }
-            },
-            child: Text('logout'),
-          ),
-        ],
-      )),
+    return Container(
+      color: Colors.red[200],
     );
   }
 }
+
+// ElevatedButton(
+//             onPressed: () async {
+//               await LoginWithGoogle.logOut();
+//               await LoginWithFacebook.logOut();
+//               loginWithAccount.logOut();
+//               if (context.mounted) {
+//                 context.goNamed(GloblalVariable.loginScreen);
+//               }
+//             },
+//             child: Text('logout'),
+//           ),
