@@ -48,6 +48,7 @@ dependencies:
   http: ^0.13.6
   shared_preferences: ^2.1.2
   provider: ^6.0.5
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +78,21 @@ flutter:
     - assets/img/google.png
     - assets/svg/google-icon.svg
     - assets/svg/comment1.svg
+    - assets/banner/1.jpg
+    - assets/banner/2.jpg
+    - assets/banner/3.jpg
+    - assets/banner/4.jpg
+    - assets/banner/5.jpg
+    - assets/img/category/fashion_nam.png
+    - assets/img/category/doisong.png
+    - assets/img/category/giay_nam.png
+    - assets/img/category/giay_nu.png
+    - assets/img/category/fashion_nu.png
+    - assets/img/category/laptop.png
+    - assets/img/category/manhinh.png
+    - assets/img/category/me_va_be.png
+    - assets/img/category/phone.png
+    - assets/img/category/sacdep.png
    
 
   # An image asset can refer to one or more resolution-specific "variants", see

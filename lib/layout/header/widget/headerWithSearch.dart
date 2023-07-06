@@ -1,5 +1,8 @@
 import 'package:clone_app_amazon/constants/global_variables.dart';
+import 'package:clone_app_amazon/provider/stateActiveColorIconHeader.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});
@@ -9,19 +12,24 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
+  // handle fillColor textfield header when go route and route location == home
+  Color fillColorTextfieldHeader(bool isActiveColorIcon) {
+    if (GoRouter.of(context).location == '/mallScreen') {
+      return const Color(0xfff1f1f1);
+    } else if (GoRouter.of(context).location == '/home' && isActiveColorIcon) {
+      return const Color(0xfff1f1f1);
+    } else {
+      return Colors.white;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 3,
-            blurRadius: 4,
-            offset: const Offset(0, 3), // changes position of shadow
-          ),
-        ],
-      ),
+    bool isActiveColorIcon =
+        Provider.of<StateActiveColorIconHeader>(context, listen: true)
+            .isActiveColorIcon;
+    return SizedBox(
+      height: 45,
       child: TextField(
         textAlignVertical: TextAlignVertical.center,
         cursorColor: const Color(0xff9c9c9c),
@@ -32,7 +40,7 @@ class _SearchState extends State<Search> {
           contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
           //
           filled: true,
-          fillColor: Colors.white,
+          fillColor: fillColorTextfieldHeader(isActiveColorIcon),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(3),
               borderSide: BorderSide.none),

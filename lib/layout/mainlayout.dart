@@ -1,5 +1,7 @@
+import 'package:clone_app_amazon/animations/TransitionPage.dart';
+import 'package:clone_app_amazon/layout/footer/footer.dart';
 import 'package:clone_app_amazon/layout/header/header.dart';
-import 'package:clone_app_amazon/layout/header/widget/search.dart';
+import 'package:clone_app_amazon/layout/header/widget/headerWithSearch.dart';
 import 'package:flutter/material.dart';
 
 class Mainlayout extends StatefulWidget {
@@ -17,12 +19,12 @@ class _MainlayoutState extends State<Mainlayout> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          widget.child,
+          TransitionPage(child: widget.child),
           const Positioned(
-            top: 14,
-            left: 20,
+            bottom: 0,
+            left: 0,
             right: 0,
-            child: HeaderApp(child: Search()),
+            child: FooterApp(),
           ),
         ],
       ),
