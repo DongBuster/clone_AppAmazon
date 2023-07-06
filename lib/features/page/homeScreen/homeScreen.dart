@@ -67,13 +67,11 @@ class _HomeScreenState extends State<HomeScreen> {
               child: SingleChildScrollView(
                   child: Column(
                 children: [
-                  // ----- category prodcuts ------
-
                   SizedBox(
-                    height: 520,
+                    height: 600,
                     child: Stack(
                       children: [
-                        // ----- banner -----
+                        // ---- banner -----
                         CarouselSlider(
                           options: CarouselOptions(
                             height: 220.0,
@@ -98,54 +96,59 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                           ).toList(),
                         ),
-
+                        //----- list items category ------
                         Positioned(
                           top: 220,
                           bottom: 0,
                           left: 0,
                           right: 0,
                           child: Container(
-                              padding: const EdgeInsets.only(top: 60),
-                              color: Colors.pink[300],
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    child: NotificationListener<
-                                        ScrollNotification>(
-                                      onNotification: (notification) {
-                                        if (notification.metrics.pixels > 20) {
-                                          isScrollListItemsCategory = true;
-                                        } else {
-                                          isScrollListItemsCategory = false;
-                                        }
-                                        return false;
-                                      },
-                                      child: GridView.builder(
-                                        scrollDirection: Axis.horizontal,
-                                        gridDelegate:
-                                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 2,
-                                          childAspectRatio: 1.2,
-                                          mainAxisSpacing: 10,
-                                          // crossAxisSpacing: 1,
-                                        ),
-                                        itemCount:
-                                            listItemsCategory.keys.length,
-                                        itemBuilder: (context, index) {
-                                          List<String> description =
-                                              listItemsCategory.keys.toList();
-                                          List<String> imagePaths =
-                                              listItemsCategory.values.toList();
-
-                                          return itemsCategory(
-                                              imagePaths[index],
-                                              description[index]);
-                                        },
+                            padding: const EdgeInsets.only(top: 60),
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [Colors.pink, Colors.white],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ),
+                            ),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 220,
+                                  child:
+                                      NotificationListener<ScrollNotification>(
+                                    onNotification: (notification) {
+                                      if (notification.metrics.pixels > 20) {
+                                        isScrollListItemsCategory = true;
+                                      } else {
+                                        isScrollListItemsCategory = false;
+                                      }
+                                      return false;
+                                    },
+                                    child: GridView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        childAspectRatio: 1.2,
+                                        mainAxisSpacing: 10,
+                                        // crossAxisSpacing: 1,
                                       ),
+                                      itemCount: listItemsCategory.keys.length,
+                                      itemBuilder: (context, index) {
+                                        List<String> description =
+                                            listItemsCategory.keys.toList();
+                                        List<String> imagePaths =
+                                            listItemsCategory.values.toList();
+
+                                        return itemsCategory(imagePaths[index],
+                                            description[index]);
+                                      },
                                     ),
                                   ),
-                                  Center(
-                                      child: Stack(
+                                ),
+                                Center(
+                                  child: Stack(
                                     children: [
                                       Container(
                                         margin:
@@ -163,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         left:
                                             isScrollListItemsCategory ? 20 : 0,
                                         duration:
-                                            const Duration(milliseconds: 300),
+                                            const Duration(milliseconds: 200),
                                         child: Container(
                                           margin:
                                               const EdgeInsets.only(bottom: 10),
@@ -194,35 +197,73 @@ class _HomeScreenState extends State<HomeScreen> {
                                           height: 6,
                                         ),
                                       ),
-                                      // Positioned(
-                                      //   top: 0,
-                                      //   left: isScrollListItemsCategory
-                                      //       ? null
-                                      //       : 0,
-                                      //   right: isScrollListItemsCategory
-                                      //       ? 0
-                                      //       : null,
-                                      //   child: Container(
-                                      //     margin:
-                                      //         const EdgeInsets.only(bottom: 10),
-                                      //     decoration: BoxDecoration(
-                                      //       borderRadius: BorderRadius.only(
-                                      //         topLeft: Radius.circular(5),
-                                      //         bottomLeft: Radius.circular(5),
-                                      //         topRight: Radius.circular(0),
-                                      //         bottomRight: Radius.circular(0),
-                                      //       ),
-                                      //       color: Colors.redAccent,
-                                      //     ),
-                                      //     width: 20,
-                                      //     height: 6,
-                                      //   ),
-                                      // ),
                                     ],
-                                  ))
-                                ],
-                              )),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Expanded(
+                                  child: Stack(
+                                    children: [
+                                      Positioned(
+                                        left: 10,
+                                        child: Container(
+                                          width: 115,
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                            image: const DecorationImage(
+                                                image: AssetImage(
+                                                    'assets/banner/banner_specialOffer1.png'),
+                                                fit: BoxFit.fill),
+                                            borderRadius:
+                                                BorderRadius.circular(3),
+                                            border:
+                                                Border.all(color: Colors.white),
+                                          ),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        left: 135,
+                                        right: 135,
+                                        child: Container(
+                                          // width: 115,
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                            image: const DecorationImage(
+                                                image: AssetImage(
+                                                    'assets/banner/banner_specialOffer2.png'),
+                                                fit: BoxFit.fill),
+                                            borderRadius:
+                                                BorderRadius.circular(3),
+                                            border:
+                                                Border.all(color: Colors.white),
+                                          ),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        right: 10,
+                                        child: Container(
+                                          width: 115,
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                            image: const DecorationImage(
+                                                image: AssetImage(
+                                                    'assets/banner/banner_specialOffer3.png'),
+                                                fit: BoxFit.fill),
+                                            borderRadius:
+                                                BorderRadius.circular(3),
+                                            border:
+                                                Border.all(color: Colors.white),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
+                        //---- electronic wallet ----
                         Positioned(
                           top: 210,
                           left: 20,
@@ -309,14 +350,20 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
-
+                  const SizedBox(height: 10),
                   Container(
                     height: 500,
-                    color: Colors.green,
+                    color: Colors.white,
+                    child: Column(
+                      children: [
+                        Row(),
+                        Row(),
+                      ],
+                    ),
                   ),
                   Container(
                     height: 500,
