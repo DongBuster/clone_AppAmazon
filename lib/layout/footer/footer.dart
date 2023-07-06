@@ -1,6 +1,7 @@
 import 'package:clone_app_amazon/constants/global_variables.dart';
 import 'package:clone_app_amazon/layout/footer/handles/handleFooter.dart';
 import 'package:clone_app_amazon/layout/footer/widgets/icon_button.dart';
+import 'package:clone_app_amazon/layout/footer/widgets/icon_buttonHome.dart';
 import 'package:clone_app_amazon/provider/stateActiveIconHome.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -51,20 +52,25 @@ class _FooterAppState extends State<FooterApp> {
               onTapIconFooter(context, GloblalVariable.homeScreen);
             },
             child: SizedBox(
-              width: 80,
-              child: IconButtonFooter(
-                icon: GoRouter.of(context).location == '/home' &&
-                        isActiveIconHome == false
-                    ? Icons.thumb_up
-                    : Icons.home_filled,
-                size: 28,
-                text: GoRouter.of(context).location == '/home' &&
-                        isActiveIconHome == false
-                    ? 'Gợi ý hôm nay'
-                    : 'Home',
-                PathRoute: '/home',
-              ),
-            ),
+                width: 80,
+                child: IconButtonHome(
+                  size: 28,
+                  pathRoute: '/home',
+                )
+                // IconButtonFooter(
+                //   icon:
+                //   GoRouter.of(context).location == '/home' &&
+                //           isActiveIconHome == false
+                //       ? Icons.thumb_up
+                //       : Icons.home_filled,
+                //   size: 28,
+                //   text: GoRouter.of(context).location == '/home' &&
+                //           isActiveIconHome == false
+                //       ? 'Gợi ý hôm nay'
+                //       : 'Home',
+                //   PathRoute: '/home',
+                // ),
+                ),
           ),
           // mail
           GestureDetector(

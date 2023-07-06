@@ -45,27 +45,28 @@ class _HomeScreenState extends State<HomeScreen> {
         Container(
           color: Colors.black12,
           child: NotificationListener<ScrollNotification>(
-              onNotification: (notification) {
-                setState(() {
-                  if (notification.metrics.pixels > 20 &&
-                      notification.metrics.axis == Axis.vertical) {
-                    Provider.of<StateActiveIconHome>(context, listen: false)
-                        .setActiveIconHome();
-                    Provider.of<StateActiveColorIconHeader>(context,
-                            listen: false)
-                        .setActiveColorIconHeader();
-                  } else {
-                    Provider.of<StateActiveIconHome>(context, listen: false)
-                        .setNotActiveIconHome();
-                    Provider.of<StateActiveColorIconHeader>(context,
-                            listen: false)
-                        .setNotActiveColorIconHeader();
-                  }
-                });
-                return false;
-              },
-              child: SingleChildScrollView(
-                  child: Column(
+            onNotification: (notification) {
+              if (notification.metrics.pixels > 20 &&
+                  notification.metrics.axis == Axis.vertical) {
+                Provider.of<StateActiveIconHome>(context, listen: false)
+                    .setActiveIconHome();
+                Provider.of<StateActiveColorIconHeader>(context, listen: false)
+                    .setActiveColorIconHeader();
+              }
+              setState(() {
+                if (notification.metrics.pixels == 0 &&
+                    notification.metrics.axis == Axis.vertical) {
+                  Provider.of<StateActiveIconHome>(context, listen: false)
+                      .setNotActiveIconHome();
+                  Provider.of<StateActiveColorIconHeader>(context,
+                          listen: false)
+                      .setNotActiveColorIconHeader();
+                }
+              });
+              return false;
+            },
+            child: SingleChildScrollView(
+              child: Column(
                 children: [
                   SizedBox(
                     height: 600,
@@ -208,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         left: 10,
                                         child: Container(
                                           width: 115,
-                                          height: 50,
+                                          height: 60,
                                           decoration: BoxDecoration(
                                             image: const DecorationImage(
                                                 image: AssetImage(
@@ -226,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         right: 135,
                                         child: Container(
                                           // width: 115,
-                                          height: 50,
+                                          height: 60,
                                           decoration: BoxDecoration(
                                             image: const DecorationImage(
                                                 image: AssetImage(
@@ -243,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         right: 10,
                                         child: Container(
                                           width: 115,
-                                          height: 50,
+                                          height: 60,
                                           decoration: BoxDecoration(
                                             image: const DecorationImage(
                                                 image: AssetImage(
@@ -355,12 +356,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   const SizedBox(height: 10),
+                  // ------------
                   Container(
                     height: 500,
                     color: Colors.white,
                     child: Column(
                       children: [
-                        Row(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [],
+                        ),
                         Row(),
                       ],
                     ),
@@ -370,7 +375,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.pink,
                   ),
                 ],
-              ))),
+              ),
+            ),
+          ),
         ),
         const Positioned(
           top: 0,
